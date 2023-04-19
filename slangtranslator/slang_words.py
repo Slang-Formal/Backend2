@@ -2,7 +2,7 @@ import re
 import openai
 
 def slang_word(informal):
-    openai.api_key = "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"
+    openai.api_key = ""
     model_engine = "text-davinci-003"
     prompt = "Can you tell me the words that are slang in the following sentence? I only want the words returned." + informal
     completion = openai.Completion.create(engine=model_engine,prompt=prompt,max_tokens=1024,n=1,stop=None,temperature=0.5,)
