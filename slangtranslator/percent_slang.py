@@ -13,5 +13,8 @@ def slang_ratio(s):
     percent = count2/count
     percent = percent*100
     percent = int(percent)
-    percent = str(percent) + '%'
-    return percent
+    if percent < 100:
+        percent = str(percent) + '%'
+        return percent
+    else:
+        return('0%')

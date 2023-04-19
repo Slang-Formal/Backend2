@@ -27,18 +27,30 @@ def slangreturn(request):
 @csrf_exempt    
 @require_POST
 def submit_string(request):
-    test = []
-    received_json_data = json.loads(request.body)
-    received_string1 = received_json_data['string']
-    age_range = agePrediction(received_string1)
-    percent_slang = slang_ratio(received_string1)
-    received_string2 = test.append(received_string1)
-    received_string = results(test)
-    region = parse(received_string1)
-    sentiment = sentiment_analysis(received_string)
-
-    if received_string == None:
-        received_string = 'ERROR'
-        return JsonResponse({'Error':received_string})
+    if request.method == 'POST':
+        try:
+            received_json_data = json.loads(request.body)
+            received_string1 = received_json_data['string']
+            test = []
+            received_string2 = test.append(received_string1)
+            received_string = results(test)
+            if received_string is None:
+                raise ValueError("Invalid input: string is empty or None")
+            else:
+                region = parse(received_string1)
+                age_range = agePrediction(received_string1)
+                percent_slang = slang_ratio(received_string1)
+                sentiment = sentiment_analysis(received_string)
+                return JsonResponse({'received_string':received_string, 'region': region, 'age_range':age_range, 'percent_slang':percent_slang, 'sentiment': sentiment})
+        except Exception as e:
+            return JsonResponse({'received_string': 'Could not translate, try another sentence :('}, status=400)
     else:
-        return JsonResponse({'received_string':received_string, 'region': region, 'age_range':age_range, 'percent_slang':percent_slang, 'sentiment': sentiment})
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+
+
+
+
+
+
