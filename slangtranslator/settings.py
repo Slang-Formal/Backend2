@@ -57,7 +57,7 @@ MIDDLEWARE = [
     
 ]
 
-ROOT_URLCONF = "backend.urls"
+ROOT_URLCONF = "slangtranslator.urls"
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "backend.wsgi.application"
+WSGI_APPLICATION = "slangtranslator.wsgi.application"
 
 
 # Database
